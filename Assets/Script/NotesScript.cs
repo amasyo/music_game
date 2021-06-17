@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class NotesScript : MonoBehaviour
+
 {
     public int lineNum;
     private GameController _gameController;
     private bool isInLine = false;
     private KeyCode _lineKey;
-
 
     private void Start()
     {
@@ -16,7 +17,7 @@ public class NotesScript : MonoBehaviour
     }
     void Update()
     {
-       transform.position += Vector3.down * 10.0f * Time.deltaTime;
+       transform.position += Vector3.down * GameController.get_notesSpeed() * Time.deltaTime;
 
         if (transform.position.y < -3.0f)
         {

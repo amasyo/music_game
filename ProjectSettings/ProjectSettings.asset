@@ -625,7 +625,7 @@ PlayerSettings:
   cloudServicesEnabled:
     Analytics: 1
     Build: 0
-    Collab: 1
+    Collab: 0
     Game Performance: 0
     Purchasing: 0
     UDP: 0
@@ -643,10 +643,10 @@ PlayerSettings:
     m_VersionName: 
   apiCompatibilityLevel: 6
   activeInputHandler: 0
-  cloudProjectId: 4e5589f2-20f3-48d1-9b42-dc5f796cf8c5
+  cloudProjectId: 636ce1f2-cb8b-4d2a-aa81-5a3f26b9d204
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: test
+  projectName: "\u97F3\u30B2\u30FC"
   organizationId: amasyo
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0

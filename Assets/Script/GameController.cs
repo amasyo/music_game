@@ -14,15 +14,23 @@ public class GameController : MonoBehaviour
     private int _notesCount = 0;
 
     private AudioSource _audioSource;
-    private float _startTime = 0;
+    public float _startTime = 0;
 
-    public float timeOffset;
+    public float timeOffset = 0f;
 
     private bool isPlaying = false;
     public GameObject startButton;
 
     public Text scoreText;
     private int _score = 0;
+
+    public static float notesSpeed = 5.0f;    // ノーツスピード
+
+    // notesSpeed の受け渡し関数
+    public static float get_notesSpeed()
+    {
+        return notesSpeed;
+    }
 
     void Start()
     {
@@ -68,16 +76,19 @@ public class GameController : MonoBehaviour
     public void StartGame()
     {
         startButton.SetActive(false);
+
         _startTime = Time.time;
+
         _audioSource.Play();
         isPlaying = true;
     }
 
     void CheckNextNotes()
     {
-        while (_timings[_notesCount] + timeOffset < GetGameTime() && _timings[_notesCount] != 0)
+        while (_timings[_notesCount] + timeOffset - 13.0f / notesSpeed < GetGameTime() && _timings[_notesCount] != 0)
         {
             SpawnNotes(_lineNums[_notesCount]);
+
             _notesCount++;
         }
     }
@@ -90,6 +101,7 @@ public class GameController : MonoBehaviour
     {
         return Time.time - _startTime;
     }
+
     public void GoodTimingFunc(int num)
     {
         Debug.Log("Line" + num + "good");

@@ -824,6 +824,7 @@ MonoBehaviour:
   - {fileID: 4735926947623856513, guid: d72b2cf9ef8c7e341a4f3c0f70807321, type: 3}
   - {fileID: 5862708953778001313, guid: 44f62fb3d3e99484b8d4d1961255414d, type: 3}
   filepath: TestTiming.csv
+  _startTime: 0
   timeOffset: 0
   startButton: {fileID: 202517126}
   scoreText: {fileID: 983282264}
