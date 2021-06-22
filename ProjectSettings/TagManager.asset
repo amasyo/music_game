@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Notes0
+  - Notes1
+  - Notes2
+  - Notes3
+  - Notes4
+  - Notes5
   layers:
   - Default
   - TransparentFX
