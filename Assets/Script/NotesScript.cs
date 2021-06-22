@@ -2,45 +2,82 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UniRx;
+using UniRx.Triggers;
 
 public class NotesScript : MonoBehaviour
 
 {
-    public int lineNum;
     private GameController _gameController;
-    private bool isInLine = false;
     private KeyCode _lineKey;
+
+    int Type;
+    float Timing;
+
+    float Distance;
+    float During;
+
+    Vector3 firstPos;
+    bool isGo;
+    float GoTime;
+
+    // ノーツ移動
+    void OnEnable()
+    {
+        isGo = false;
+        firstPos = this.transform.position;
+
+        this.UpdateAsObservable()
+          .Where(_ => isGo)
+          .Subscribe(_ => {
+              this.gameObject.transform.position = new Vector3(firstPos.x, firstPos.y - Distance * (Time.time * 1000 - GoTime) / During, firstPos.z);
+          });
+    }
+
+    public void setParameter(int type, float timing)
+    {
+        Type = type;
+        Timing = timing;
+    }
+
+    public int getType()
+    {
+        return Type;
+    }
+
+    public float getTiming()
+    {
+        return Timing;
+    }
+
+    public void go(float distance, float during)
+    {
+        Distance = distance;
+        During = during;
+        GoTime = Time.time * 1000;
+
+        isGo = true;
+    }
 
     private void Start()
     {
         _gameController = GameObject.Find("GameController").GetComponent<GameController>();
+        _lineKey = Gameutil.GetKeyCodeByLineNum(Type);
     }
     void Update()
     {
-       transform.position += Vector3.down * GameController.get_notesSpeed() * Time.deltaTime;
-
-        if (transform.position.y < -3.0f)
+        // ここが判定機構
+        if (transform.position.y > -4.0f && transform.position.y < -2.0f)
         {
-            Debug.Log("false");
-            Destroy(gameObject);
+            CheckInput(_lineKey);
         }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        isInLine = true;
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        isInLine = false;
     }
 
     void CheckInput(KeyCode key)
     {
         if (Input.GetKeyDown(key))
         {
-            _gameController.GoodTimingFunc(lineNum);
+            _gameController.GoodTimingFunc(Type);
             Destroy(gameObject);
         }
     }

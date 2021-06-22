@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 5862708953778001314}
   - component: {fileID: 5862708953778001315}
   - component: {fileID: 5862708953778001312}
-  - component: {fileID: 5862708953778001317}
+  - component: {fileID: 193343114404498961}
   m_Layer: 0
   m_Name: Notes5
-  m_TagString: Untagged
+  m_TagString: Notes5
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -111,7 +111,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &5862708953778001317
+--- !u!114 &193343114404498961
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -123,4 +123,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47675deb77e51ae4c976ed362d1dbb3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lineNum: 5
+  lineNum: 0
