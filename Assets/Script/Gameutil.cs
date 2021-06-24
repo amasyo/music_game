@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Gameutil : MonoBehaviour
 {
-    public static KeyCode GetKeyCodeByLineNum(int linenum)
+    public static KeyCode GetKeyCodeByType(int type)
     {
-        switch (linenum)
+        switch (type)
         {
             case 0:
                 return KeyCode.S;
