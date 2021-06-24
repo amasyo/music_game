@@ -8,9 +8,6 @@ using UniRx.Triggers;
 public class NotesScript : MonoBehaviour
 
 {
-    private GameController _gameController;
-    private KeyCode _lineKey;
-
     int Type;
     float Timing;
 
@@ -21,16 +18,34 @@ public class NotesScript : MonoBehaviour
     bool isGo;
     float GoTime;
 
+    bool Hide;
+
     // ノーツ移動
     void OnEnable()
     {
         isGo = false;
         firstPos = this.transform.position;
 
+        Hide = false;
+
         this.UpdateAsObservable()
           .Where(_ => isGo)
           .Subscribe(_ => {
-              this.gameObject.transform.position = new Vector3(firstPos.x, firstPos.y - Distance * (Time.time * 1000 - GoTime) / During, firstPos.z);
+              this.gameObject.transform.position = new Vector3(firstPos.x, firstPos.y - Distance * (Time.time * 1000f - GoTime) / During, firstPos.z);
+          });
+
+        // ノーツが画面外に出たらMiss判定にする
+        this.UpdateAsObservable()
+          .Where(_ => this.gameObject.transform.position.y < -5.0f )
+          .Subscribe(_ => {
+              hideMe();
+              Debug.Log("Miss");
+          });
+
+        this.UpdateAsObservable()
+          .Where(_ => Hide)
+          .Subscribe(_ => {
+              this.gameObject.SetActive(false);
           });
     }
 
@@ -54,31 +69,13 @@ public class NotesScript : MonoBehaviour
     {
         Distance = distance;
         During = during;
-        GoTime = Time.time * 1000;
+        GoTime = Time.time * 1000f;
 
         isGo = true;
     }
 
-    private void Start()
+    public void hideMe()
     {
-        _gameController = GameObject.Find("GameController").GetComponent<GameController>();
-        _lineKey = Gameutil.GetKeyCodeByLineNum(Type);
-    }
-    void Update()
-    {
-        // ここが判定機構
-        if (transform.position.y > -4.0f && transform.position.y < -2.0f)
-        {
-            CheckInput(_lineKey);
-        }
-    }
-
-    void CheckInput(KeyCode key)
-    {
-        if (Input.GetKeyDown(key))
-        {
-            _gameController.GoodTimingFunc(Type);
-            Destroy(gameObject);
-        }
+        Hide = true;
     }
 }

@@ -345,6 +345,7 @@
 "Assets/Script/CSVWriter.cs"
 "Assets/Script/GameController.cs"
 "Assets/Script/Gameutil.cs"
+"Assets/Script/MessageEffectManager.cs"
 "Assets/Script/NotesScript.cs"
 "Assets/Script/NotesTimingMaker.cs"
 -langversion:8.0
