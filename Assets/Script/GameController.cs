@@ -212,7 +212,7 @@ public class GameController : MonoBehaviour
         PlayTime = Time.time * 1000f;
         isPlaying = true;
 
-        notesSpeed = 2.0f;  // ノーツスピードを格納
+        notesSpeed = 4.0f;  // ノーツスピードを格納
         if (notesSpeed >= 1.0f && notesSpeed <= 12.0f)      // ノーツスピードが適切な範囲かチェック
         {
             During = -4000f / 9f * notesSpeed + 49000f / 9f;    // ノーツ生成位置から判定ラインまで移動するのにかかる時間（線形的に計算）
