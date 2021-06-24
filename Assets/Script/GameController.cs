@@ -28,7 +28,10 @@ public class GameController : MonoBehaviour
     public GameObject startButton;
 
     public Text scoreText;
-    private int _score = 0;     // スコア
+    private int Score = 0;     // スコア
+
+    public Text judgeText;
+    private string Judge = "";     // 判定
 
     public static float notesSpeed = 1.0f;    // ノーツスピード
 
@@ -47,12 +50,6 @@ public class GameController : MonoBehaviour
     List<float> NoteTimings;
 
     List<GameObject> Notes;     // ノーツの配列
-
-    // notesSpeed の受け渡し関数
-    public static float get_notesSpeed()
-    {
-        return notesSpeed;
-    }
 
     void Start()
     {
@@ -203,7 +200,8 @@ public class GameController : MonoBehaviour
     {
         if (isPlaying)
         {
-            scoreText.text = _score.ToString();
+            scoreText.text = Score.ToString();
+            judgeText.text = Judge;
         }
     }
 
@@ -252,7 +250,8 @@ public class GameController : MonoBehaviour
                 Notes[minDiffIndex].GetComponent<NotesScript>().hideMe();
 
                 MessageEffectSubject.OnNext("Perfect");
-                _score += 100;
+                Score += 100;
+                Judge = "Perfect";
                 Debug.Log("Perfect");
             }
 
@@ -262,7 +261,8 @@ public class GameController : MonoBehaviour
                 Notes[minDiffIndex].GetComponent<NotesScript>().hideMe();
 
                 MessageEffectSubject.OnNext("Great");
-                _score += 70;
+                Score += 70;
+                Judge = "Great";
                 Debug.Log("Great");
             }
 
@@ -272,7 +272,8 @@ public class GameController : MonoBehaviour
                 Notes[minDiffIndex].GetComponent<NotesScript>().hideMe();
 
                 MessageEffectSubject.OnNext("Good");
-                _score += 40;
+                Score += 40;
+                Judge = "Good";
                 Debug.Log("Good");
             }
 
@@ -282,7 +283,8 @@ public class GameController : MonoBehaviour
                 Notes[minDiffIndex].GetComponent<NotesScript>().hideMe();
 
                 MessageEffectSubject.OnNext("Bad");
-                _score += 10;
+                Score += 10;
+                Judge = "Bad";
                 Debug.Log("Bad");
             }
 
@@ -296,5 +298,10 @@ public class GameController : MonoBehaviour
         {
             // 仮置き
         }
+    }
+
+    public void missJudge()
+    {
+        Judge = "Miss";
     }
 }
