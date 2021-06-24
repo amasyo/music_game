@@ -39,6 +39,7 @@ public class NotesScript : MonoBehaviour
           .Where(_ => this.gameObject.transform.position.y < -5.0f )
           .Subscribe(_ => {
               hideMe();
+              GameObject.Find("GameController").GetComponent<GameController>().missJudge();
               Debug.Log("Miss");
           });
 
